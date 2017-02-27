@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorBackground"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_college_name"
+                android:textColor="@color/textPrimaryColor"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/text_tag_line"
+                android:textColor="@color/textPrimaryColor"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_main_logo" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin"
+                android:textColor="@color/textPrimaryColor"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/et_height"
+                android:layout_marginBottom="@dimen/et_mb"
+                android:layout_marginLeft="@dimen/et_ml"
+                android:layout_marginRight="@dimen/et_mr"
+                android:background="@drawable/bg_edit_text_login"
+                android:drawableLeft="@drawable/ic_address"
+                android:drawablePadding="@dimen/et_drawable_padding"
+                android:hint="Email"
+                android:paddingBottom="@dimen/et_pb"
+                android:paddingLeft="@dimen/et_pl"
+                android:paddingRight="@dimen/et_pr"
+                android:paddingTop="@dimen/et_pt"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/et_height"
+                android:layout_marginBottom="@dimen/et_mb"
+                android:layout_marginLeft="@dimen/et_ml"
+                android:layout_marginRight="@dimen/et_mr"
+                android:background="@drawable/bg_edit_text_login"
+                android:drawableLeft="@drawable/ic_key"
+                android:drawablePadding="@dimen/et_drawable_padding"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingBottom="@dimen/et_pb"
+                android:paddingLeft="@dimen/et_pl"
+                android:paddingRight="@dimen/et_pr"
+                android:paddingTop="@dimen/et_pt"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@color/colorTeal"
+                android:gravity="center"
+                android:text="Login"
+                android:textColor="#fff"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/tvRegisterHere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/btn_link_to_register"
+                android:textColor="@color/dividerColor"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
