@@ -14,10 +14,14 @@ import android.widget.Toast;
 
 import com.admin.ewrittenapp.admin.R;
 import com.admin.ewrittenapp.admin.helper.InputValidatorHelper;
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -28,6 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
     private ProgressDialog pDialog;
     private InputValidatorHelper validatorHelper;
+    private static final String FIREBASE_URL = "https://e-written-application-aa06e.firebaseio.com/";
+    Firebase rootFB;
 
     //initialization of components or variables
     void initialization() {
@@ -38,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = (Button) findViewById(R.id.btnRegister);
         pDialog = new ProgressDialog(this);
         auth = FirebaseAuth.getInstance();
+        rootFB = new Firebase(FIREBASE_URL);
     }
 
     @Override
@@ -73,7 +80,14 @@ public class RegisterActivity extends AppCompatActivity {
                                         Toast.makeText(RegisterActivity.this, "Enter valid data." + task.getException(),
                                                 Toast.LENGTH_SHORT).show();
                                     } else {
-                                        startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));
+                                        //adding admin to the databse in admin node
+                                        Map<String, Object> userUpdates = new HashMap<String, Object>();
+                                        userUpdates.put("email", auth.getCurrentUser().getEmail());
+                                        userUpdates.put("isData", false);
+                                        rootFB.child("admin").child(auth.getCurrentUser().getUid()).updateChildren(userUpdates);
+                                        //startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));
+                                        auth.signOut();
+                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                         Log.d(TAG, "onCreate: " + "data is not given and start get details activity");
                                         finish();
                                     }
