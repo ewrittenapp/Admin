@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     static final String TAG = RegisterActivity.class.getSimpleName();
     FirebaseAuth auth;
     InputValidatorHelper validatorHelper;
-    static final String FIREBASE_URL = "https://e-written-application-aa06e.firebaseio.com/";
+    static final String FIREBASE_URL = "https://final-project-d2fd7.firebaseio.com/";
     Firebase rootFB;
 
     //initialization of components or variables

@@ -4,7 +4,7 @@ package com.admin.ewrittenapp.admin.pojo;
  * Created by Shahrukh Mansuri on 12/11/2016.
  */
 
-public class Teaching {
+public class Faculty {
     String firstName;
     String middleName;
     String lastName;
@@ -13,7 +13,7 @@ public class Teaching {
     String email;
     String mobile;
 
-    public Teaching(String firstName, String middleName, String lastName, String branch, String facultyId, String email, String mobile) {
+    public Faculty(String firstName, String middleName, String lastName, String branch, String facultyId, String email, String mobile) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;

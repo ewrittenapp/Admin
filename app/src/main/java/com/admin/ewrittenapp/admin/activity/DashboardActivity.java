@@ -33,13 +33,15 @@ public class DashboardActivity extends AppCompatActivity {
     Spinner spnNewUser;
     Spinner spnUserType;
 
-    static final String FIREBASE_URL = "https://e-written-application-aa06e.firebaseio.com/";
+    static final String FIREBASE_URL = "https://final-project-d2fd7.firebaseio.com/";
     static final String TAG = DashboardActivity.class.getSimpleName();
     FirebaseAuth auth;
     FirebaseAuth.AuthStateListener authStateListener;
     Firebase rootFB;
     FirebaseUser user;
     Bundle bundle;
+    List<String> newUsers;
+    List<String> userKey;
 
     private void initialization() {
         btnLogout = (Button) findViewById(R.id.btnLogout);
@@ -50,6 +52,8 @@ public class DashboardActivity extends AppCompatActivity {
         rootFB = new Firebase(FIREBASE_URL);
         user = FirebaseAuth.getInstance().getCurrentUser();
         bundle = new Bundle();
+        newUsers = new ArrayList<String>();
+        userKey = new ArrayList<String>();
 
     }
 
@@ -81,7 +85,6 @@ public class DashboardActivity extends AppCompatActivity {
                     });
                 } else {
                     startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                    Log.d(TAG, "onCreate: " + "if user is null than jump to LoginActivity");
                     finish();
                 }
             }
@@ -90,13 +93,11 @@ public class DashboardActivity extends AppCompatActivity {
         spnNewUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                bundle.putString("key","demo");
-                bundle.putString("email",spnNewUser.getSelectedItem().toString());
+                bundle.putString("key",userKey.get(i));
+                bundle.putString("email",newUsers.get(i));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
@@ -107,7 +108,6 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 auth.signOut();
                 startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                Log.d(TAG, "onCreate: " + "signing out");
                 finish();
             }
         });
@@ -148,20 +148,22 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                List<String> newUsers = new ArrayList<String>();
-                List<String> userKey = new ArrayList<String>();
                 if (dataSnapshot.exists()) {
+                    newUsers.clear();
+                    userKey.clear();
                     for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
                         Log.d(TAG, "onDataChange: " + areaSnapshot.getKey());
                         userKey.add(areaSnapshot.getKey());
                         newUsers.add(areaSnapshot.child("email").getValue(String.class));
                     }
-                    ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(DashboardActivity.this, android.R.layout.simple_spinner_item, newUsers);
-                    areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spnNewUser.setAdapter(areasAdapter);
+                    ArrayAdapter<String> userAdapter = new ArrayAdapter<String>(DashboardActivity.this, android.R.layout.simple_spinner_item, newUsers);
+                    userAdapter.notifyDataSetChanged();
+                    userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spnNewUser.setAdapter(userAdapter);
                 } else {
                     newUsers.clear();
                     userKey.clear();
+                    spnNewUser.setAdapter(null);
                 }
 
             }

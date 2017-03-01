@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "4946358455",
-    "firebase_url": "https://e-written-application-aa06e.firebaseio.com",
-    "project_id": "e-written-application-aa06e",
-    "storage_bucket": "e-written-application-aa06e.appspot.com"
+    "project_number": "156590151776",
+    "firebase_url": "https://final-project-d2fd7.firebaseio.com",
+    "project_id": "final-project-d2fd7",
+    "storage_bucket": "final-project-d2fd7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:4946358455:android:1d2672f1f32a8dd4",
+        "mobilesdk_app_id": "1:156590151776:android:7b4d129615aad181",
         "android_client_info": {
-          "package_name": "com.fyproject.ewrittenapplication"
+          "package_name": "com.fyproject.shrey.ewrittenappclient"
         }
       },
       "oauth_client": [
         {
-          "client_id": "4946358455-3uciu8mrjrmp11st3of0qliacbsgct97.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.fyproject.ewrittenapplication",
-            "certificate_hash": "9e2e2d03b6165130f18e6614dde9433a9638339e"
-          }
-        },
-        {
-          "client_id": "4946358455-4sobvsnda4pg55lmsa59j9tu5qeti354.apps.googleusercontent.com",
+          "client_id": "156590151776-il7p4r9g3j4cig8jt7omfu0joo1o61i6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDd8uxJ3fVsTGfmGwtmlyC7yaC6oQi7Zdo"
+          "current_key": "AIzaSyDMfgY5YuMpx6sdu5IgGwf97B2OQrB7afY"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "4946358455-4sobvsnda4pg55lmsa59j9tu5qeti354.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
@@ -52,20 +39,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:4946358455:android:a56b43fc38d4a51b",
+        "mobilesdk_app_id": "1:156590151776:android:a56b43fc38d4a51b",
         "android_client_info": {
           "package_name": "com.admin.ewrittenapp.admin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "4946358455-4sobvsnda4pg55lmsa59j9tu5qeti354.apps.googleusercontent.com",
+          "client_id": "156590151776-il7p4r9g3j4cig8jt7omfu0joo1o61i6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDd8uxJ3fVsTGfmGwtmlyC7yaC6oQi7Zdo"
+          "current_key": "AIzaSyDMfgY5YuMpx6sdu5IgGwf97B2OQrB7afY"
         }
       ],
       "services": {

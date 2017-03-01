@@ -1,11 +1,8 @@
 package com.admin.ewrittenapp.admin.fragment;
 
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +14,7 @@ import android.widget.Toast;
 import com.admin.ewrittenapp.admin.R;
 import com.admin.ewrittenapp.admin.helper.InputValidatorHelper;
 import com.admin.ewrittenapp.admin.pojo.Student;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class StudentDetailsFragment extends Fragment {
     EditText etFirstName;
@@ -33,11 +26,9 @@ public class StudentDetailsFragment extends Fragment {
     EditText etEnrollNum;
     EditText etPhoneNum;
     Button btnSubmit;
-    private static final String FIREBASE_URL = "https://e-written-application-aa06e.firebaseio.com/";
+    private static final String FIREBASE_URL = "https://final-project-d2fd7.firebaseio.com/";
     private static final String TAG = StudentDetailsFragment.class.getSimpleName();
     Firebase rootFB;
-    FirebaseAuth auth;
-    ProgressDialog progress;
     InputValidatorHelper validatorHelper;
 
     public static StudentDetailsFragment newInstance() {
@@ -68,21 +59,13 @@ public class StudentDetailsFragment extends Fragment {
                     Student student = new Student(firstName, middleName, lastName, branch, Integer.parseInt(sem), div,
                             enrollNum, getArguments().getString("email"), phoneNum);
                     rootFB.child("students").child(getArguments().getString("key")).setValue(student);
+                    Toast.makeText(getContext(), "User data inserted:"+getArguments().getString("email"), Toast.LENGTH_SHORT).show();
                     rootFB.child("newUser").child(getArguments().getString("key")).removeValue();
                 }
             }
         });
-
-        /*btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), getArguments().getString("email"), Toast.LENGTH_SHORT).show();
-            }
-        });*/
         return view;
     }
-
-
 
     private boolean inputValidation() {
         boolean valid = true;
@@ -128,9 +111,6 @@ public class StudentDetailsFragment extends Fragment {
         etPhoneNum = (EditText) view.findViewById(R.id.etPhoneNum);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
         rootFB = new Firebase(FIREBASE_URL);
-        auth = FirebaseAuth.getInstance();
-        progress = new ProgressDialog(getContext());
-        progress.setMessage("Please wait...");
 
         validatorHelper = new InputValidatorHelper();
     }

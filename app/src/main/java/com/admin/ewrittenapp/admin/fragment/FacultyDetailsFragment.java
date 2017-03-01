@@ -1,7 +1,6 @@
 package com.admin.ewrittenapp.admin.fragment;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.admin.ewrittenapp.admin.R;
 import com.admin.ewrittenapp.admin.helper.InputValidatorHelper;
-import com.admin.ewrittenapp.admin.pojo.Teaching;
+import com.admin.ewrittenapp.admin.pojo.Faculty;
 import com.firebase.client.Firebase;
-import com.google.firebase.auth.FirebaseAuth;
 
 import static com.google.android.gms.internal.zzs.TAG;
 
@@ -29,10 +28,8 @@ public class FacultyDetailsFragment extends Fragment {
     EditText etFacultyId;
     EditText etPhoneNum;
     Button btnSubmit;
-    private static final String FIREBASE_URL = "https://e-written-application-aa06e.firebaseio.com/";
+    private static final String FIREBASE_URL = "https://final-project-d2fd7.firebaseio.com/";
     Firebase rootFB;
-    FirebaseAuth auth;
-    ProgressDialog progress;
     InputValidatorHelper validatorHelper;
 
     public static FacultyDetailsFragment newInstance() {
@@ -52,19 +49,18 @@ public class FacultyDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (inputValidation()) {
-                    progress.show();
                     String firstName = etFirstName.getText().toString().trim();
                     String middleName = etMiddleName.getText().toString().trim();
                     String lastName = etLastName.getText().toString().trim();
                     String facultyId = etFacultyId.getText().toString().trim();
                     String phoneNum = etPhoneNum.getText().toString().trim();
                     String branch = (String) spnBranch.getSelectedItem();
-                    Teaching teaching = new Teaching(firstName, middleName, lastName, branch, facultyId,
-                            auth.getCurrentUser().getEmail(), phoneNum);
-                    rootFB.child("teaching").child(facultyId).setValue(teaching);
-                    rootFB.child("dataGiven").child(auth.getCurrentUser().getUid()).setValue(true);
-                    rootFB.child("category").child(auth.getCurrentUser().getUid()).setValue("teaching");
+                    Faculty faculty = new Faculty(firstName, middleName, lastName, branch, facultyId,
+                            getArguments().getString("email"), phoneNum);
                     Log.d(TAG, "onDataChange: " + "add all the data to firebase");
+                    rootFB.child("faculties").child(getArguments().getString("key")).setValue(faculty);
+                    Toast.makeText(getContext(), "User data inserted:"+getArguments().getString("email"), Toast.LENGTH_SHORT).show();
+                    rootFB.child("newUser").child(getArguments().getString("key")).removeValue();
                 }
 
             }
@@ -113,9 +109,6 @@ public class FacultyDetailsFragment extends Fragment {
         etPhoneNum = (EditText) view.findViewById(R.id.etPhoneNum);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
         rootFB = new Firebase(FIREBASE_URL);
-        auth = FirebaseAuth.getInstance();
-        progress = new ProgressDialog(getContext());
-        progress.setMessage("Please wait...");
         validatorHelper = new InputValidatorHelper();
     }
 }

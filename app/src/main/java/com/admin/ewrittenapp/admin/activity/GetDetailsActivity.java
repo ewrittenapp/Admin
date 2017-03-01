@@ -23,7 +23,7 @@ public class GetDetailsActivity extends AppCompatActivity {
 
     EditText etFname,etMname,etLname,etDob,etMobile;
     Button btnSubmit;
-    private static final String FIREBASE_URL = "https://e-written-application-aa06e.firebaseio.com/";
+    private static final String FIREBASE_URL = "https://final-project-d2fd7.firebaseio.com/";
     FirebaseAuth auth;
     Firebase rootFB;
     FirebaseUser user;
