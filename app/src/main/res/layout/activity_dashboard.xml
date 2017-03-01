@@ -1,85 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="true"
     tools:context="com.admin.ewrittenapp.admin.activity.DashboardActivity">
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout" />
-
-    <Button
-        android:id="@+id/btnUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Show user" />
     <LinearLayout
+        android:id="@+id/activity_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add new User"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/et_height"
-            android:layout_marginBottom="@dimen/et_mb"
-            android:layout_marginLeft="@dimen/et_ml"
-            android:layout_marginRight="@dimen/et_mr"
-            android:background="@drawable/bg_edit_text_login"
-            android:drawableLeft="@drawable/ic_address"
-            android:drawablePadding="@dimen/et_drawable_padding"
-            android:hint="Email"
-            android:paddingBottom="@dimen/et_pb"
-            android:paddingLeft="@dimen/et_pl"
-            android:paddingRight="@dimen/et_pr"
-            android:paddingTop="@dimen/et_pt"
-            android:singleLine="true" />
-
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/et_height"
-            android:layout_marginBottom="@dimen/et_mb"
-            android:layout_marginLeft="@dimen/et_ml"
-            android:layout_marginRight="@dimen/et_mr"
-            android:background="@drawable/bg_edit_text_login"
-            android:drawableLeft="@drawable/ic_key"
-            android:drawablePadding="@dimen/et_drawable_padding"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:paddingBottom="@dimen/et_pb"
-            android:paddingLeft="@dimen/et_pl"
-            android:paddingRight="@dimen/et_pr"
-            android:paddingTop="@dimen/et_pt"
-            android:singleLine="true" />
-
         <Button
-            android:id="@+id/btnAdd"
+            android:id="@+id/btnLogout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
+            android:text="Logout" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@color/colorTeal"
-            android:gravity="center"
-            android:text="Add"
-            android:textColor="#fff"
-            android:textSize="18dp" />
+            android:text="User Type" />
 
+        <Spinner
+            android:id="@+id/spnUserType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="@color/colorAccent"
+            android:entries="@array/userType"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="New Users" />
+
+        <Spinner
+            android:id="@+id/spnNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="@color/colorAccent"
+            android:spinnerMode="dropdown" />
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
     </LinearLayout>
 
-</LinearLayout>
+
+</ScrollView>
+
+
+

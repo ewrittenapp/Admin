@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,24 +27,29 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private static final String TAG = RegisterActivity.class.getSimpleName();
-    private EditText inputEmail, inputPassword;
-    private TextView tvLogin;
-    private FirebaseAuth auth;
-    private Button btnRegister;
-    private ProgressDialog pDialog;
-    private InputValidatorHelper validatorHelper;
-    private static final String FIREBASE_URL = "https://e-written-application-aa06e.firebaseio.com/";
+    EditText etEmail, etPassword;
+    TextView tvLogin;
+    Button btnRegister;
+    ProgressDialog pDialog;
+    RadioGroup rgUserType;
+    RadioButton rdoAdmin, rdoUser;
+    static final String TAG = RegisterActivity.class.getSimpleName();
+    FirebaseAuth auth;
+    InputValidatorHelper validatorHelper;
+    static final String FIREBASE_URL = "https://e-written-application-aa06e.firebaseio.com/";
     Firebase rootFB;
 
     //initialization of components or variables
     void initialization() {
-        validatorHelper = new InputValidatorHelper();
-        inputEmail = (EditText) findViewById(R.id.etEmail);
-        inputPassword = (EditText) findViewById(R.id.etPassword);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
         tvLogin = (TextView) findViewById(R.id.tvRegistered);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         pDialog = new ProgressDialog(this);
+        rgUserType = (RadioGroup) findViewById(R.id.rgUserType);
+        rdoAdmin = (RadioButton) findViewById(R.id.rdoAdmin);
+        rdoUser = (RadioButton) findViewById(R.id.rdoUser);
+        validatorHelper = new InputValidatorHelper();
         auth = FirebaseAuth.getInstance();
         rootFB = new Firebase(FIREBASE_URL);
     }
@@ -65,14 +72,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (inputValidation()) {
-                    String email = inputEmail.getText().toString().trim();
-                    String password = inputPassword.getText().toString().trim();
+                    final String email = etEmail.getText().toString().trim();
+                    final String password = etPassword.getText().toString().trim();
                     showDialog();
                     auth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    Toast.makeText(RegisterActivity.this, "Successfully registered.", Toast.LENGTH_SHORT).show();
                                     hideDialog();
 
                                     if (!task.isSuccessful()) {
@@ -80,16 +86,36 @@ public class RegisterActivity extends AppCompatActivity {
                                         Toast.makeText(RegisterActivity.this, "Enter valid data." + task.getException(),
                                                 Toast.LENGTH_SHORT).show();
                                     } else {
-                                        //adding admin to the databse in admin node
-                                        Map<String, Object> userUpdates = new HashMap<String, Object>();
-                                        userUpdates.put("email", auth.getCurrentUser().getEmail());
-                                        userUpdates.put("isData", false);
-                                        rootFB.child("admin").child(auth.getCurrentUser().getUid()).updateChildren(userUpdates);
-                                        //startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));
-                                        auth.signOut();
-                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                        Log.d(TAG, "onCreate: " + "data is not given and start get details activity");
-                                        finish();
+
+                                        switch (rgUserType.getCheckedRadioButtonId()) {
+                                            case R.id.rdoAdmin:
+                                                Toast.makeText(RegisterActivity.this, "Admin successfully registered", Toast.LENGTH_SHORT).show();
+                                                Map<String, Object> adminUpdates = new HashMap<String, Object>();
+                                                adminUpdates.put("email", auth.getCurrentUser().getEmail());
+                                                adminUpdates.put("isData", false);
+                                                rootFB.child("admin").child(auth.getCurrentUser().getUid()).updateChildren(adminUpdates);
+                                                auth.signOut();
+                                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                                Log.d(TAG, "onCreate: " + "data is not given and start get details activity");
+                                                finish();
+                                                break;
+                                            case R.id.rdoUser:
+                                                Toast.makeText(RegisterActivity.this, "User registered " + email, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(RegisterActivity.this, "Register another user", Toast.LENGTH_LONG).show();
+
+                                                Map<String, Object> userCred = new HashMap<String, Object>();
+                                                userCred.put("email", auth.getCurrentUser().getEmail());
+                                                userCred.put("password", password);
+                                                rootFB.child("userCredential").child(auth.getCurrentUser().getUid()).updateChildren(userCred);
+
+                                                Map<String, Object> newUser = new HashMap<String, Object>();
+                                                newUser.put("email", auth.getCurrentUser().getEmail());
+                                                rootFB.child("newUser").child(auth.getCurrentUser().getUid()).updateChildren(newUser);
+
+                                                clearFields();
+                                                auth.signOut();
+                                                break;
+                                        }
                                     }
                                 }
                             });
@@ -98,14 +124,19 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    void clearFields() {
+        etEmail.setText("");
+        etPassword.setText("");
+    }
+
     boolean inputValidation() {
         boolean valid = true;
-        if (!validatorHelper.isValidEmail(inputEmail.getText().toString())) {
-            inputEmail.setError("Enter valid email");
+        if (!validatorHelper.isValidEmail(etEmail.getText().toString())) {
+            etEmail.setError("Enter valid email");
             valid = false;
         }
-        if (!validatorHelper.isValidPassword(inputPassword.getText().toString(), true)) {
-            inputPassword.setError("Use at least one special, one upper, one lower charter and one number. Password length should be greater than 6.");
+        if (!validatorHelper.isValidPassword(etPassword.getText().toString(), true)) {
+            etPassword.setError("Use at least one special, one upper, one lower charter and one number. Password length should be greater than 6.");
             valid = false;
         }
         return valid;

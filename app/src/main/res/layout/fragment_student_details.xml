@@ -1,0 +1,198 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.admin.ewrittenapp.admin.fragment.StudentDetailsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="5dp">
+
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginBottom="@dimen/et_mb"
+            android:layout_marginLeft="@dimen/et_ml"
+            android:layout_marginRight="@dimen/et_mr"
+            android:background="@drawable/bg_edit_text_detail"
+            android:drawableLeft="@drawable/ic_user"
+            android:drawablePadding="@dimen/et_drawable_padding"
+            android:hint="@string/text_first_name"
+            android:paddingBottom="@dimen/et_pb"
+            android:paddingLeft="@dimen/et_pl"
+            android:paddingRight="@dimen/et_pr"
+            android:paddingTop="@dimen/et_pt"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etMiddleName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginBottom="@dimen/et_mb"
+            android:layout_marginLeft="@dimen/et_ml"
+            android:layout_marginRight="@dimen/et_mr"
+            android:background="@drawable/bg_edit_text_detail"
+            android:drawableLeft="@drawable/ic_user"
+            android:drawablePadding="@dimen/et_drawable_padding"
+            android:hint="@string/text_middle_name"
+            android:paddingBottom="@dimen/et_pb"
+            android:paddingLeft="@dimen/et_pl"
+            android:paddingRight="@dimen/et_pr"
+            android:paddingTop="@dimen/et_pt"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etLastName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginBottom="@dimen/et_mb"
+            android:layout_marginLeft="@dimen/et_ml"
+            android:layout_marginRight="@dimen/et_mr"
+            android:background="@drawable/bg_edit_text_detail"
+            android:drawableLeft="@drawable/ic_user"
+            android:drawablePadding="@dimen/et_drawable_padding"
+            android:hint="@string/text_last_name"
+            android:paddingBottom="@dimen/et_pb"
+            android:paddingLeft="@dimen/et_pl"
+            android:paddingRight="@dimen/et_pr"
+            android:paddingTop="@dimen/et_pt"
+            android:singleLine="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Branch"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spnBranch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:backgroundTint="@color/colorAccent"
+                android:entries="@array/branches" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Semester"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spnSem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:entries="@array/semesters" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Division"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spnDiv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:entries="@array/divisions" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/etEnrollNum"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginBottom="@dimen/et_mb"
+            android:layout_marginLeft="@dimen/et_ml"
+            android:layout_marginRight="@dimen/et_mr"
+            android:background="@drawable/bg_edit_text_detail"
+            android:drawableLeft="@drawable/ic_number"
+            android:drawablePadding="@dimen/et_drawable_padding"
+            android:hint="Enrollment number"
+            android:inputType="number"
+            android:paddingBottom="@dimen/et_pb"
+            android:paddingLeft="@dimen/et_pl"
+            android:paddingRight="@dimen/et_pr"
+            android:paddingTop="@dimen/et_pt"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etPhoneNum"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:layout_marginBottom="@dimen/et_mb"
+            android:layout_marginLeft="@dimen/et_ml"
+            android:layout_marginRight="@dimen/et_mr"
+            android:background="@drawable/bg_edit_text_detail"
+            android:drawableLeft="@drawable/ic_phone"
+            android:drawablePadding="@dimen/et_drawable_padding"
+            android:hint="Phone number"
+            android:inputType="number"
+            android:maxLength="10"
+            android:paddingBottom="@dimen/et_pb"
+            android:paddingLeft="@dimen/et_pl"
+            android:paddingRight="@dimen/et_pr"
+            android:paddingTop="@dimen/et_pt"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="submit"
+            android:textColor="#fff"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+</FrameLayout>
