@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,10 +31,10 @@ import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    Button btnLogout;
     ProgressDialog pDialog;
     Spinner spnNewUser;
     Spinner spnUserType;
+    Toolbar toolbar;
 
     static final String FIREBASE_URL = "https://final-project-d2fd7.firebaseio.com/";
     static final String TAG = DashboardActivity.class.getSimpleName();
@@ -44,10 +47,11 @@ public class DashboardActivity extends AppCompatActivity {
     List<String> userKey;
 
     private void initialization() {
-        btnLogout = (Button) findViewById(R.id.btnLogout);
         pDialog = new ProgressDialog(this);
         spnNewUser = (Spinner) findViewById(R.id.spnNewUser);
         spnUserType = (Spinner) findViewById(R.id.spnUserType);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         auth = FirebaseAuth.getInstance();
         rootFB = new Firebase(FIREBASE_URL);
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -62,7 +66,13 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         initialization();
+        userAuthListener();
+        changeBundleDataOfUser();
+        insertingDataToSpinner();
+        fragmentReplacement();
+    }
 
+    void userAuthListener() {
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -89,26 +99,18 @@ public class DashboardActivity extends AppCompatActivity {
                 }
             }
         };
+    }
 
+    void changeBundleDataOfUser() {
         spnNewUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                bundle.putString("key",userKey.get(i));
-                bundle.putString("email",newUsers.get(i));
+                bundle.putString("key", userKey.get(i));
+                bundle.putString("email", newUsers.get(i));
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-        insertingDataToSpinner();
-        fragmentReplacement();
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                auth.signOut();
-                startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                finish();
             }
         });
     }
@@ -176,6 +178,27 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_logout:
+                logout();
+                break;
+            case R.id.action_faculty_post:
+                startActivity(new Intent(DashboardActivity.this,FacultyPostActivity.class));
+                break;
+
+        }
+        return true;
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         auth.addAuthStateListener(authStateListener);
@@ -187,6 +210,12 @@ public class DashboardActivity extends AppCompatActivity {
         if (authStateListener != null) {
             auth.removeAuthStateListener(authStateListener);
         }
+    }
+
+    private void logout() {
+        auth.signOut();
+        startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
+        finish();
     }
 
     private void showDialog() {

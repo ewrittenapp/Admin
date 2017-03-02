@@ -96,7 +96,6 @@ public class RegisterActivity extends AppCompatActivity {
                                                 rootFB.child("admin").child(auth.getCurrentUser().getUid()).updateChildren(adminUpdates);
                                                 auth.signOut();
                                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                                Log.d(TAG, "onCreate: " + "data is not given and start get details activity");
                                                 finish();
                                                 break;
                                             case R.id.rdoUser:

@@ -2,51 +2,51 @@ package com.admin.ewrittenapp.admin.pojo;
 
 public class Student {
 
-    String firstName;
-    String middleName;
-    String lastName;
+    String fname;
+    String mname;
+    String lname;
     String branch;
     int sem;
     String div;
-    String enrollNum;
+    String enroll;
     String email;
     String mobile;
 
     public Student(String firstName, String middleName, String lastName, String branch, int sem,
                    String div, String enrollNum, String email, String mobile) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
+        this.fname = firstName;
+        this.mname = middleName;
+        this.lname = lastName;
         this.branch = branch;
         this.sem = sem;
         this.div = div;
-        this.enrollNum = enrollNum;
+        this.enroll = enrollNum;
         this.email = email;
         this.mobile = mobile;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFname() {
+        return fname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 
-    public String getMiddleName() {
-        return middleName;
+    public String getMname() {
+        return mname;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public void setMname(String mname) {
+        this.mname = mname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLname() {
+        return lname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 
     public String getBranch() {
@@ -73,12 +73,12 @@ public class Student {
         this.div = div;
     }
 
-    public String getEnrollNum() {
-        return enrollNum;
+    public String getEnroll() {
+        return enroll;
     }
 
-    public void setEnrollNum(String enrollNum) {
-        this.enrollNum = enrollNum;
+    public void setEnroll(String enroll) {
+        this.enroll = enroll;
     }
 
     public String getEmail() {
@@ -96,5 +96,4 @@ public class Student {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
-
 }

@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:inputType="textCapWords"
             android:singleLine="true"
             android:id="@+id/etFirstName"
             android:layout_width="match_parent"
@@ -29,23 +30,7 @@
             android:paddingTop="@dimen/et_pt" />
 
         <EditText
-            android:singleLine="true"
-            android:id="@+id/etMiddleName"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/et_height"
-            android:layout_marginBottom="@dimen/et_mb"
-            android:layout_marginLeft="@dimen/et_ml"
-            android:layout_marginRight="@dimen/et_mr"
-            android:background="@drawable/bg_edit_text_detail"
-            android:drawableLeft="@drawable/ic_user"
-            android:drawablePadding="@dimen/et_drawable_padding"
-            android:hint="@string/text_middle_name"
-            android:paddingBottom="@dimen/et_pb"
-            android:paddingLeft="@dimen/et_pl"
-            android:paddingRight="@dimen/et_pr"
-            android:paddingTop="@dimen/et_pt" />
-
-        <EditText
+            android:inputType="textCapWords"
             android:singleLine="true"
             android:id="@+id/etLastName"
             android:layout_width="match_parent"
@@ -84,24 +69,6 @@
                 android:backgroundTint="@color/colorAccent"
                 android:entries="@array/branches" />
         </LinearLayout>
-
-        <EditText
-            android:singleLine="true"
-            android:id="@+id/etFacultyId"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/et_height"
-            android:layout_marginBottom="@dimen/et_mb"
-            android:layout_marginLeft="@dimen/et_ml"
-            android:layout_marginRight="@dimen/et_mr"
-            android:background="@drawable/bg_edit_text_detail"
-            android:drawableLeft="@drawable/ic_number"
-            android:drawablePadding="@dimen/et_drawable_padding"
-            android:hint="Faculty ID"
-            android:inputType="number"
-            android:paddingBottom="@dimen/et_pb"
-            android:paddingLeft="@dimen/et_pl"
-            android:paddingRight="@dimen/et_pr"
-            android:paddingTop="@dimen/et_pt" />
 
         <EditText
             android:singleLine="true"

@@ -12,6 +12,7 @@
         android:paddingTop="5dp">
 
         <EditText
+            android:inputType="textCapWords"
             android:id="@+id/etFirstName"
             android:layout_width="match_parent"
             android:layout_height="@dimen/et_height"
@@ -29,6 +30,7 @@
             android:singleLine="true" />
 
         <EditText
+            android:inputType="textCapWords"
             android:id="@+id/etMiddleName"
             android:layout_width="match_parent"
             android:layout_height="@dimen/et_height"
@@ -46,6 +48,7 @@
             android:singleLine="true" />
 
         <EditText
+            android:inputType="textCapWords"
             android:id="@+id/etLastName"
             android:layout_width="match_parent"
             android:layout_height="@dimen/et_height"

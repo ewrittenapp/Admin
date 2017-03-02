@@ -5,46 +5,25 @@ package com.admin.ewrittenapp.admin.pojo;
  */
 
 public class Faculty {
-    String firstName;
-    String middleName;
-    String lastName;
+
+    String name;
     String branch;
-    String facultyId;
     String email;
     String mobile;
 
-    public Faculty(String firstName, String middleName, String lastName, String branch, String facultyId, String email, String mobile) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
+    public Faculty(String name, String branch, String email, String mobile) {
+        this.name = name;
         this.branch = branch;
-        this.facultyId = facultyId;
         this.email = email;
         this.mobile = mobile;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBranch() {
@@ -53,14 +32,6 @@ public class Faculty {
 
     public void setBranch(String branch) {
         this.branch = branch;
-    }
-
-    public String getFacultyId() {
-        return facultyId;
-    }
-
-    public void setFacultyId(String facultyId) {
-        this.facultyId = facultyId;
     }
 
     public String getEmail() {
@@ -78,6 +49,4 @@ public class Faculty {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
-
-
 }
