@@ -18,6 +18,7 @@ import com.admin.ewrittenapp.admin.R;
 import com.admin.ewrittenapp.admin.helper.InputValidatorHelper;
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -82,11 +83,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     hideDialog();
 
                                     if (!task.isSuccessful()) {
-                                        Toast.makeText(RegisterActivity.this, task.getResult().toString(), Toast.LENGTH_SHORT).show();
-                                        Toast.makeText(RegisterActivity.this, "Enter valid data." + task.getException(),
-                                                Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterActivity.this, "Enter valid data.", Toast.LENGTH_SHORT).show();
                                     } else {
-
                                         switch (rgUserType.getCheckedRadioButtonId()) {
                                             case R.id.rdoAdmin:
                                                 Toast.makeText(RegisterActivity.this, "Admin successfully registered", Toast.LENGTH_SHORT).show();
@@ -117,7 +115,12 @@ public class RegisterActivity extends AppCompatActivity {
                                         }
                                     }
                                 }
-                            });
+                            }).addOnFailureListener(RegisterActivity.this, new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
         });

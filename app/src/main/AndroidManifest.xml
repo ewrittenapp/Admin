@@ -26,6 +26,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.DashboardActivity" />
         </activity>
+        <activity android:name=".activity.UserPasswordActivity"></activity>
     </application>
 
 </manifest>

@@ -2,14 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="One"
-        app:showAsAction="never" />
-    <item
-        android:title="Two"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_faculty_post"
         android:title="Faculty Post"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_user_password"
+        android:title="User Password"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_logout"

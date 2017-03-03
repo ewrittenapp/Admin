@@ -26,7 +26,6 @@
         android:layout_below="@+id/appbar"
         android:fillViewport="true">
 
-
         <LinearLayout
             android:id="@+id/activity_main"
             android:layout_width="match_parent"
@@ -34,21 +33,24 @@
             android:layout_marginTop="10dp"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Add User Details"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
 
             <LinearLayout
+                android:id="@+id/llUserType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="Add User Details"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -56,6 +58,7 @@
                     android:layout_marginRight="30dp"
                     android:text="User Type"
                     android:textStyle="bold" />
+
                 <Spinner
                     android:id="@+id/spnUserType"
                     android:layout_width="match_parent"
@@ -68,10 +71,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llNewUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,6 +84,7 @@
                     android:layout_marginRight="30dp"
                     android:text="New Users"
                     android:textStyle="bold" />
+
                 <Spinner
                     android:id="@+id/spnNewUser"
                     android:layout_width="match_parent"
@@ -93,6 +99,17 @@
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></FrameLayout>
+
+            <TextView
+                android:id="@+id/tvNoNewUser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="No New User"
+                android:textSize="40dp" />
         </LinearLayout>
 
     </ScrollView>

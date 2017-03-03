@@ -13,7 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.admin.ewrittenapp.admin.R;
@@ -35,7 +38,10 @@ public class DashboardActivity extends AppCompatActivity {
     Spinner spnNewUser;
     Spinner spnUserType;
     Toolbar toolbar;
-
+    LinearLayout llUserType;
+    LinearLayout llNewUser;
+    FrameLayout fragmentContainer;
+    TextView tvNoNewUser;
     static final String FIREBASE_URL = "https://final-project-d2fd7.firebaseio.com/";
     static final String TAG = DashboardActivity.class.getSimpleName();
     FirebaseAuth auth;
@@ -46,12 +52,17 @@ public class DashboardActivity extends AppCompatActivity {
     List<String> newUsers;
     List<String> userKey;
 
+
     private void initialization() {
         pDialog = new ProgressDialog(this);
         spnNewUser = (Spinner) findViewById(R.id.spnNewUser);
         spnUserType = (Spinner) findViewById(R.id.spnUserType);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        llNewUser = (LinearLayout) findViewById(R.id.llNewUser);
+        llUserType = (LinearLayout) findViewById(R.id.llUserType);
+        fragmentContainer = (FrameLayout) findViewById(R.id.fragment_container);
+        tvNoNewUser = (TextView) findViewById(R.id.tvNoNewUser);
         auth = FirebaseAuth.getInstance();
         rootFB = new Firebase(FIREBASE_URL);
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -67,9 +78,10 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         initialization();
         userAuthListener();
+        showDialog();
+        fragmentReplacement();
         changeBundleDataOfUser();
         insertingDataToSpinner();
-        fragmentReplacement();
     }
 
     void userAuthListener() {
@@ -88,7 +100,6 @@ public class DashboardActivity extends AppCompatActivity {
                                 }
                             }
                         }
-
                         @Override
                         public void onCancelled(FirebaseError firebaseError) {
                         }
@@ -136,9 +147,7 @@ public class DashboardActivity extends AppCompatActivity {
                                 .replace(R.id.fragment_container, facFragment).commit();
                         break;
                 }
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -151,10 +160,10 @@ public class DashboardActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
+                    showView();
                     newUsers.clear();
                     userKey.clear();
                     for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
-                        Log.d(TAG, "onDataChange: " + areaSnapshot.getKey());
                         userKey.add(areaSnapshot.getKey());
                         newUsers.add(areaSnapshot.child("email").getValue(String.class));
                     }
@@ -162,12 +171,14 @@ public class DashboardActivity extends AppCompatActivity {
                     userAdapter.notifyDataSetChanged();
                     userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spnNewUser.setAdapter(userAdapter);
+                    hideDialog();
                 } else {
+                    hideView();
                     newUsers.clear();
                     userKey.clear();
                     spnNewUser.setAdapter(null);
+                    hideDialog();
                 }
-
             }
 
             @Override
@@ -176,6 +187,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -190,12 +202,30 @@ public class DashboardActivity extends AppCompatActivity {
             case R.id.action_logout:
                 logout();
                 break;
+
             case R.id.action_faculty_post:
-                startActivity(new Intent(DashboardActivity.this,FacultyPostActivity.class));
+                startActivity(new Intent(DashboardActivity.this, FacultyPostActivity.class));
                 break;
 
+            case R.id.action_user_password:
+                startActivity(new Intent(DashboardActivity.this, UserPasswordActivity.class));
+                break;
         }
         return true;
+    }
+
+    void showView(){
+        llNewUser.setVisibility(View.VISIBLE);
+        llUserType.setVisibility(View.VISIBLE);
+        fragmentContainer.setVisibility(View.VISIBLE);
+        tvNoNewUser.setVisibility(View.GONE);
+    }
+
+    void hideView(){
+        llNewUser.setVisibility(View.GONE);
+        llUserType.setVisibility(View.GONE);
+        fragmentContainer.setVisibility(View.GONE);
+        tvNoNewUser.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -220,8 +250,10 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void showDialog() {
         if (!pDialog.isShowing()) {
-            pDialog.setMessage("Adding user...");
+            pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
+            hideView();
+            tvNoNewUser.setVisibility(View.GONE);
             pDialog.show();
         }
     }

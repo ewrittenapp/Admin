@@ -70,6 +70,7 @@ public class FacultyDetailsFragment extends Fragment {
                     rootFB.child("userType").setValue(userType);
                     Toast.makeText(getContext(), "User data inserted:"+getArguments().getString("email"), Toast.LENGTH_SHORT).show();
                     rootFB.child("newUser").child(getArguments().getString("key")).removeValue();
+                    clearFields();
                 }
 
             }
@@ -77,6 +78,11 @@ public class FacultyDetailsFragment extends Fragment {
         return view;
     }
 
+    void clearFields(){
+        etFirstName.setText("");
+        etLastName.setText("");
+        etFirstName.setText("");
+    }
 
     private boolean inputValidation() {
         boolean valid = true;

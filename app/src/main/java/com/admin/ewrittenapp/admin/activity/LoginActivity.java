@@ -19,6 +19,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,21 +56,31 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = inputEmail.getText().toString().trim();
                 final String password = inputPassword.getText().toString().trim();
-                showDialog();
-                auth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (!task.isSuccessful()) {
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_LONG).show();
-                                    hideDialog();
-                                } else {
-                                    hideDialog();
-                                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-                                    finish();
+                if(!email.equals("") && !password.equals("")){
+                    showDialog();
+                    auth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (!task.isSuccessful()) {
+                                        Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_LONG).show();
+                                        hideDialog();
+                                    } else {
+                                        hideDialog();
+                                        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                                        finish();
+                                    }
                                 }
-                            }
-                        });
+                            }).addOnFailureListener(LoginActivity.this, new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(LoginActivity.this, "Input fields can't be empty.", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

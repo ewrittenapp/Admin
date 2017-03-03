@@ -67,6 +67,7 @@ public class StudentDetailsFragment extends Fragment {
                     rootFB.child("userType").setValue(userType);
                     Toast.makeText(getContext(), "User data inserted:"+getArguments().getString("email"), Toast.LENGTH_SHORT).show();
                     rootFB.child("newUser").child(getArguments().getString("key")).removeValue();
+                    clearFields();
                 }
             }
         });
@@ -119,5 +120,13 @@ public class StudentDetailsFragment extends Fragment {
         rootFB = new Firebase(FIREBASE_URL);
 
         validatorHelper = new InputValidatorHelper();
+    }
+
+    void clearFields(){
+        etFirstName.setText("");
+        etMiddleName.setText("");
+        etLastName.setText("");
+        etEnrollNum.setText("");
+        etPhoneNum.setText("");
     }
 }
