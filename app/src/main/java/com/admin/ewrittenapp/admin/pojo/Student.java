@@ -6,13 +6,13 @@ public class Student {
     String mname;
     String lname;
     String branch;
-    int sem;
+    String sem;
     String div;
     String enroll;
     String email;
     String mobile;
 
-    public Student(String firstName, String middleName, String lastName, String branch, int sem,
+    public Student(String firstName, String middleName, String lastName, String branch, String sem,
                    String div, String enrollNum, String email, String mobile) {
         this.fname = firstName;
         this.mname = middleName;
@@ -57,11 +57,11 @@ public class Student {
         this.branch = branch;
     }
 
-    public int getSem() {
+    public String getSem() {
         return sem;
     }
 
-    public void setSem(int sem) {
+    public void setSem(String sem) {
         this.sem = sem;
     }
 

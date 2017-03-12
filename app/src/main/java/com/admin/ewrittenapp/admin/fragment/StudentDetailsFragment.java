@@ -59,7 +59,7 @@ public class StudentDetailsFragment extends Fragment {
                     String sem = (String) spnSem.getSelectedItem();
                     String div = (String) spnDiv.getSelectedItem();
 
-                    Student student = new Student(firstName, middleName, lastName, branch, Integer.parseInt(sem), div,
+                    Student student = new Student(firstName, middleName, lastName, branch, sem, div,
                             enrollNum, getArguments().getString("email"), phoneNum);
                     rootFB.child("studentNode").child(getArguments().getString("key")).setValue(student);
                     Map<String,String> userType = new HashMap<String, String>();

@@ -33,7 +33,7 @@ public class UserPasswordActivity extends AppCompatActivity {
     Map<String, String> hello;
     List<String> userEmail;
     List<String> userPassword;
-//
+
     void initialization() {
         actvEmail = (AutoCompleteTextView) findViewById(R.id.actvEmail);
         tvPassword = (TextView) findViewById(R.id.tvPassword);
