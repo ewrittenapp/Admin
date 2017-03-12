@@ -65,9 +65,9 @@ public class FacultyDetailsFragment extends Fragment {
                     }
                     Log.d(TAG, "onClick: brc short "+brc);
                     rootFB.child("facultyList").child(brc).child(getArguments().getString("key")).setValue(facUser);
-                    Map<String,String> userType = new HashMap<String, String>();
-                    userType.put(getArguments().getString("key"),"FACULTY");
-                    rootFB.child("userType").setValue(userType);
+//                    Map<String,String> userType = new HashMap<String, String>();
+//                    userType.put(getArguments().getString("key"),"FACULTY");
+                    rootFB.child("userType").child(getArguments().getString("key")).setValue("FACULTY");
                     Toast.makeText(getContext(), "User data inserted:"+getArguments().getString("email"), Toast.LENGTH_SHORT).show();
                     rootFB.child("newUser").child(getArguments().getString("key")).removeValue();
                     clearFields();

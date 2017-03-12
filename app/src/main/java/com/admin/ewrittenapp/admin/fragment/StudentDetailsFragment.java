@@ -62,9 +62,9 @@ public class StudentDetailsFragment extends Fragment {
                     Student student = new Student(firstName, middleName, lastName, branch, sem, div,
                             enrollNum, getArguments().getString("email"), phoneNum);
                     rootFB.child("studentNode").child(getArguments().getString("key")).setValue(student);
-                    Map<String,String> userType = new HashMap<String, String>();
-                    userType.put(getArguments().getString("key"),"STUDENT");
-                    rootFB.child("userType").setValue(userType);
+//                    Map<String,String> userType = new HashMap<String, String>();
+//                    userType.put(getArguments().getString("key"),"STUDENT");
+                    rootFB.child("userType").child(getArguments().getString("key")).setValue("STUDENT");
                     Toast.makeText(getContext(), "User data inserted:"+getArguments().getString("email"), Toast.LENGTH_SHORT).show();
                     rootFB.child("newUser").child(getArguments().getString("key")).removeValue();
                     clearFields();
